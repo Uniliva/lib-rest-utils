@@ -1,10 +1,12 @@
 package com.github.uniliva.restutils.exception;
 
+import com.github.uniliva.commonsutils.exception.BaseException;
+
 public class NaoEncontradoException extends BaseException {
 	private static final long serialVersionUID = 1L;
 
 	public NaoEncontradoException() {
-		this.getErro().setMensagem("Erro de negocio");
+		this.getErro().setMensagem("Não encontrado!");
 	}
 
 	public NaoEncontradoException(final String message, final Throwable cause) {

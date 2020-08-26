@@ -17,7 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BaseWebDto extends BaseDto {
 	private static final long serialVersionUID = 1L;
-	
+
 	private transient HttpHeaders header;
 	private transient HttpServletRequest request;
 

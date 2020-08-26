@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.github.uniliva.commonsutils.dto.Erro;
-import com.github.uniliva.commonsutils.dto.ErroValidacao;
+import com.github.uniliva.commonsutils.exception.BaseException;
 import com.github.uniliva.commonsutils.exception.ErroDeNegocioException;
 import com.github.uniliva.restutils.dto.DadosResponse;
-import com.github.uniliva.restutils.exception.BaseException;
+import com.github.uniliva.restutils.dto.ErroValidacao;
 import com.github.uniliva.restutils.exception.NaoEncontradoException;
 import com.github.uniliva.restutils.resource.UtilContoller;
 
