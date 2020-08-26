@@ -12,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.github.uniliva.restutils.dto.DadosResponse;
 import com.github.uniliva.restutils.enums.HttpEnum;
 
-public interface UtilContoller {
+public interface BaseResource {
 
 	/**
 	 * <p>

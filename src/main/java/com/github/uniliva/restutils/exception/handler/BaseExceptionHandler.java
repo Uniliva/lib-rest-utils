@@ -16,10 +16,10 @@ import com.github.uniliva.commonsutils.exception.ErroDeNegocioException;
 import com.github.uniliva.restutils.dto.DadosResponse;
 import com.github.uniliva.restutils.dto.ErroValidacao;
 import com.github.uniliva.restutils.exception.NaoEncontradoException;
-import com.github.uniliva.restutils.resource.UtilContoller;
+import com.github.uniliva.restutils.resource.BaseResource;
 
 @ControllerAdvice
-public class BaseExceptionHandler implements UtilContoller {
+public class BaseExceptionHandler implements BaseResource {
 
 	@ExceptionHandler({ NaoEncontradoException.class })
 	ResponseEntity<DadosResponse<Erro>> notFound(NaoEncontradoException e, HttpServletRequest request) {
