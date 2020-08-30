@@ -34,7 +34,6 @@ jobs:
        servers: '[{"id": "ossrh", "username": "${{ secrets.JIRA_SONARTYPE_ID }}", "password": "${{ secrets.JIRA_SONARTYPE_PWD }}"}]'
        githubServer : false
      
-     
     - name: Build with Maven
       run: |
         mvn clean deploy --file pom.xml
