@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpHeaders;
 
-import com.github.uniliva.commonsutils.dto.BaseDto;
+import com.github.uniliva.commonsutils.dto.BaseDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseWebDto extends BaseDto {
+public class BaseWebDto extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 
 	private transient HttpHeaders header;
