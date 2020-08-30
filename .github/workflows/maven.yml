@@ -1,0 +1,40 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+        
+    - name: Import GPG key
+      id: import_gpg
+      uses: crazy-max/ghaction-import-gpg@v2
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        PASSPHRASE: ${{ secrets.GPG_PASS }}
+      
+    - name: Configure settings xml
+      uses: s4u/maven-settings-action@v2.1.0
+      with:
+       servers: '[{"id": "ossrh", "username": "${{ secrets.JIRA_SONARTYPE_ID }}", "password": "${{ secrets.JIRA_SONARTYPE_PWD }}"}]'
+       githubServer : false
+     
+     
+    - name: Build with Maven
+      run: |
+        mvn clean deploy --file pom.xml
