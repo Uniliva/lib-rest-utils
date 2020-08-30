@@ -20,23 +20,33 @@ public interface BaseResource {
 	 * sucesso, incluindo o parâmetro "response" na generalização "dados" de
 	 * DadosResponse
 	 *
-	 * @param response {@link T}
-	 * @return {@link ResponseEntity<DadosResponse<T>>}
+	 * @param <T>      - Classe que define o tipo de retorno
+	 * @param httpEnum - Enum que defino o codigo de retorno
+	 * @param response - Dados do response
+	 * @return Um response entity
 	 */
 	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarResponse(final HttpEnum httpEnum,
 			final T response) {
 		return ResponseEntity.status(httpEnum.getStatus()).body(new DadosResponse<>(httpEnum, response));
 	}
 
-	/*
-	 * HTTP 200
+	/**
+	 * Retorna dados com status 200
+	 * 
+	 * @param <T>      - Classe que define o tipo de retorno
+	 * @param response - Dados do response
+	 * @return Um response entity com status 200
 	 */
 	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarSucesso(final T response) {
 		return response != null ? retornarResponse(HTTP_200, response) : retornarSemConteudo();
 	}
 
-	/*
-	 * HTTP 200
+	/**
+	 * Retorna uma lista de dados com status 200
+	 * 
+	 * @param <T>      - Classe que define o tipo de retorno
+	 * @param response - Dados do response
+	 * @return Um response entity com uma lista de dados com status 200
 	 */
 	default <T extends Object> ResponseEntity<DadosResponse<List<T>>> retornarSucesso(final List<T> response) {
 		return !response.isEmpty() ? retornarResponse(HTTP_200, response) : retornarSemConteudo();
@@ -47,54 +57,55 @@ public interface BaseResource {
 	 * Através de um {@link Optional} verifica se há um retorno para a chamada, em
 	 * caso positivo, retorna http 200 com o recurso retornado, caso contrário,
 	 * retorna http 204 com uma mensagem padrão de recurso não encontrado.
-	 *
-	 * @param responseOpt
-	 * @return
+	 * 
+	 * @param <T>         - Classe que define o tipo de retorno
+	 * @param responseOpt - Optional que de um tipo de dados
+	 * @return Um response entity com dados se tiver, ou retorno sem conteudo com
+	 *         status 200
 	 */
 	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarSucesso(final Optional<T> responseOpt) {
 		return responseOpt.isPresent() ? retornarResponse(HTTP_200, responseOpt.get()) : retornarSemConteudo();
 	}
 
 	/**
-	 * Este método deve ser utilizado apenas pelos serviços de health.
-	 *
-	 * @return
-	 */
-	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarSucesso() {
-		return retornarResponse(HttpEnum.HTTP_200, null);
-	}
-
-	/*
-	 * HTTP 201
+	 * Retorna dados response entity com dados e status de criado
+	 * 
+	 * @param <T>      - Classe que define o tipo de retorno
+	 * @param response - Dados do response
+	 * @return response entity com dados e status de criado
 	 */
 	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarCriado(final T response) {
 		return retornarResponse(HttpEnum.HTTP_201, response);
 	}
 
-	/*
-	 * HTTP 201
+	/**
+	 * Retorna com status 201 e com a url do recurso no header
+	 * 
+	 * @param <T>   - Classe que define o tipo de retorno
+	 * @param id    - Id do recurso criado 
+	 * @return   response entity com status criado e a url do recurso no header
 	 */
 	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarCriadoHeader(final Long id) {
 		final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
+	/**
+	 * Retorna com status 201 porem sem dados
+	 * @param <T>  - Classe que define o tipo de retorno
+	 * @return   response entity com status criado, porem sem dados
+	 */
 	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarCriado() {
 		return retornarResponse(HttpEnum.HTTP_201, null);
 	}
 
-	/*
-	 * HTTP 204
+	/**
+	 * Retonar sem contudo e com status 204
+	 * @param <T>  - Classe que define o tipo de retorno
+	 * @return response entity com status com status 204, sem conteudo
 	 */
 	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarSemConteudo() {
 		return retornarResponse(HttpEnum.HTTP_204, null);
-	}
-
-	/*
-	 * HTTP 304
-	 */
-	default <T extends Object> ResponseEntity<DadosResponse<T>> retornarNaoAlterado() {
-		return retornarResponse(HttpEnum.HTTP_304, null);
 	}
 
 }
