@@ -1,3 +1,6 @@
+
+![Java CI with Maven](https://github.com/Uniliva/lib-rest-utils/workflows/Java%20CI%20with%20Maven/badge.svg)
+
 # lib-rest-utils
 
 
