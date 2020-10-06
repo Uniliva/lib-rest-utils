@@ -6,7 +6,7 @@
 	
 	<groupId>com.github.uniliva</groupId>
 	<artifactId>lib-rest-utils</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>lib-rest-utils</name>
 	<description>Biblioteca com classes uteis para criação de apis rest</description>
 	<url>https://github.com/Uniliva/lib-rest-utils</url>
